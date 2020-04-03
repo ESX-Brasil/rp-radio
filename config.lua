@@ -40,6 +40,9 @@ radioConfig = {
     Frequency = {
         Private = { -- List of private frequencies
             [1] = true, -- Make 1 a private frequency
+            [2] = true, -- Make 2 a private frequency
+            [3] = true, -- Make 3 a private frequency
+            [4] = true, -- Make 4 a private frequency
         }, -- List of private frequencies
         Current = 1, -- Don't touch
         CurrentIndex = 1, -- Don't touch
@@ -48,5 +51,5 @@ radioConfig = {
         List = {}, -- Frequency list, Don't touch
         Access = {}, -- List of freqencies a player has access to
     },
-    AllowRadioWhenClosed = false -- Allows the radio to be used when not open (uses police radio animation) 
+    AllowRadioWhenClosed = false -- Allows the radio to be used when not open (uses police radio animation)
 }

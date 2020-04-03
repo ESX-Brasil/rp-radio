@@ -2,14 +2,14 @@ fx_version "adamant"
 game "gta5"
 
 name "rp-radio"
-description "Um rádio no jogo que utiliza a API de rádio esx_mumble_voip para FiveM"
+description "Um rádio no jogo que utiliza a API de rádio mumble-voip para FiveM"
 author "Renildo Marcio (renildomrc@gmail.com)"
-version "1.0.1"
+version "1.0.2"
 
 ui_page "index.html"
 
 dependencies {
-	"esx_mumble_voip",
+	"mumble-voip",
 }
 
 files {

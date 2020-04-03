@@ -44,7 +44,7 @@ Radio.Commands = {
 				Radio:Toggle(false)
 				Radio.On = false
 				Radio:Remove()
-				exports["esx_mumble"]:SetMumbleProperty("radioEnabled", false)
+				exports["mumble-voip"]:SetMumbleProperty("radioEnabled", false)
 			elseif Radio.Open and isFalling then
 				Radio:Toggle(false)
 			end
@@ -124,7 +124,7 @@ function Radio:Toggle(toggle)
 	self.Open = toggle
 
 	if self.On and not radioConfig.AllowRadioWhenClosed then
-		exports["esx_mumble"]:SetMumbleProperty("radioEnabled", toggle)
+		exports["mumble-voip"]:SetMumbleProperty("radioEnabled", toggle)
 	end
 
 	local dictionaryType = 1 + (IsPedInAnyVehicle(playerPed, false) and 1 or 0)
@@ -176,12 +176,12 @@ end
 
 -- Adicionar player ao canal de rádio
 function Radio:Add(id)
-	exports["esx_mumble"]:SetRadioChannel(id)
+	exports["mumble-voip"]:SetRadioChannel(id)
 end
 
 -- Remova o player do canal de rádio
 function Radio:Remove()
-	exports["esx_mumble"]:SetRadioChannel(0)
+	exports["mumble-voip"]:SetRadioChannel(0)
 end
 
 -- Aumentar a frequência de rádio
@@ -314,7 +314,7 @@ function SetAllowRadioWhenClosed(value)
 	radioConfig.Frequency.AllowRadioWhenClosed = value
 
 	if Radio.On and not Radio.Open and radioConfig.AllowRadioWhenClosed then
-		exports["esx_mumble"]:SetMumbleProperty("radioEnabled", true)
+		exports["mumble-voip"]:SetMumbleProperty("radioEnabled", true)
 	end
 end
 
@@ -466,7 +466,7 @@ Citizen.CreateThread(function()
 			Radio:Toggle(not Radio.Open)
 		elseif (Radio.Open or Radio.On) and ((not Radio.Enabled) or (not Radio.Has) or isDead) then
 			Radio:Remove()
-			exports["esx_mumble"]:SetMumbleProperty("radioEnabled", false)
+			exports["mumble-voip"]:SetMumbleProperty("radioEnabled", false)
 			Radio:Toggle(false)
 			Radio.On = false
 		elseif Radio.Open and isFalling then
@@ -534,7 +534,7 @@ Citizen.CreateThread(function()
 			if IsControlJustPressed(0, radioConfig.Controls.Toggle.Key) then
 				Radio.On = not Radio.On
 
-				exports["esx_mumble"]:SetMumbleProperty("radioEnabled", Radio.On)
+				exports["mumble-voip"]:SetMumbleProperty("radioEnabled", Radio.On)
 
 				if Radio.On then
 					SendNUIMessage({ sound = "audio_on", volume = 0.3})
@@ -628,7 +628,7 @@ Citizen.CreateThread(function()
 
 					SendNUIMessage({ sound = "audio_off", volume = 0.5})
 
-					exports["esx_mumble"]:SetMumbleProperty("micClicks", Radio.Clicks)
+					exports["mumble-voip"]:SetMumbleProperty("micClicks", Radio.Clicks)
 				end
 			end
 		else
@@ -651,12 +651,12 @@ Citizen.CreateThread(function()
 end)
 
 AddEventHandler("onClientResourceStart", function(resName)
-	if GetCurrentResourceName() ~= resName and "esx_mumble" ~= resName then
+	if GetCurrentResourceName() ~= resName and "mumble-voip" ~= resName then
 		return
 	end
 
-	exports["esx_mumble"]:SetMumbleProperty("radioClickMaxChannel", radioConfig.Frequency.Max) -- Definir cliques de rádio ativados para todas as frequências de rádio
-	exports["esx_mumble"]:SetMumbleProperty("radioEnabled", false) -- Desativar controle de rádio
+	exports["mumble-voip"]:SetMumbleProperty("radioClickMaxChannel", radioConfig.Frequency.Max) -- Definir cliques de rádio ativados para todas as frequências de rádio
+	exports["mumble-voip"]:SetMumbleProperty("radioEnabled", false) -- Desativar controle de rádio
 
 	if Radio.Open then
 		Radio:Toggle(false)
